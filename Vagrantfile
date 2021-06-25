@@ -31,8 +31,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     # For Api
     config.vm.network "forwarded_port", guest: 9090, host: 9090
 
-    #Kibana
-    config.vm.network "forwarded_port", guest: 5601, host: 5601
+    # Postgresql
+    config.vm.network "forwarded_port", guest: 5432, host: 5432
     
 
     # This gets executed for both vm1 & vm2
