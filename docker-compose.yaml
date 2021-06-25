@@ -1,0 +1,54 @@
+version: '3.8'
+
+services:
+  app:
+    image: app:${SERVICE_IMAGE_TAG}
+    container_name: app
+    restart: ${RESTART_POLICY}
+    depends_on:
+      - postgresql
+    networks:
+      - back-tier
+    environment:
+      - TZ
+      - SERVER_PORT
+      - OPENAPI_TITLE
+      - OPENAPI_DESCRIPTION
+      - OPENAPI_VERSION
+      - OPENAPI_TERMS-OF-SERVICE-URL
+      - OPENAPI_LICENCE
+      - OPENAPI_LICENCE_URL
+      - MAX_FILE_SIZE
+      - SPRING_PROFILES_ACTIVE
+      - SPRING_DATASOURCE_URL
+      - SPRING_DATASOURCE_USERNAME
+      - SPRING_DATASOURCE_PASSWORD
+    ports:
+      - ${SERVER_PORT}:${SERVER_PORT}
+
+  postgresql:
+    image: bitnami/postgresql:${POSTGRESQL_IMAGE_TAG}
+    container_name: postgresql
+    restart: ${RESTART_POLICY}
+    networks:
+      - back-tier
+    environment:
+      - TZ
+      - POSTGRESQL_DATABASE
+      - POSTGRESQL_USERNAME
+      - POSTGRESQL_PASSWORD
+      - POSTGRESQL_POSTGRES_PASSWORD
+    volumes:
+      - postgresql-data:/bitnami/postgresql
+    ports:
+      - 5432:5432
+
+networks:
+  back-tier:
+    driver: bridge
+    name: back-tier
+
+volumes:
+  postgresql-data:
+    driver: local
+    name: postgresql-data
