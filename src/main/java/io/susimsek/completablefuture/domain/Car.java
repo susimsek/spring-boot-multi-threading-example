@@ -7,6 +7,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
+@Table(name = "car")
 @Entity
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Getter

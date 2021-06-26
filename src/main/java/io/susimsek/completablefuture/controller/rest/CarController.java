@@ -60,7 +60,7 @@ public class CarController {
 
     })
     @Operation(summary = "Get All Cars")
-    @GetMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces=MediaType.APPLICATION_JSON_VALUE )
+    @GetMapping(produces=MediaType.APPLICATION_JSON_VALUE )
     @ResponseStatus(HttpStatus.OK)
     public CompletableFuture<List<Car>> getAllCars() throws Exception {
         return carService.getAllCars().exceptionally(handleGetCarFailure);
